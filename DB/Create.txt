@@ -36,3 +36,25 @@ CREATE TABLE t_hospital (
 );
 
 CREATE INDEX idx_hospital_location ON t_hospital USING GIST(location);
+
+
+CREATE TABLE t_hospital_medicalcodes (
+  id SERIAL PRIMARY KEY,
+  hospital_id INTEGER NOT NULL,
+  medical_spec_code_id INTEGER NOT NULL,
+  CONSTRAINT unique_hospital_medical_spec UNIQUE (hospital_id, medical_spec_code_id)
+);
+
+ALTER TABLE t_hospital_medicalcodes
+ADD CONSTRAINT fk_hospital
+FOREIGN KEY (hospital_id)
+REFERENCES t_hospital(id)
+ON UPDATE CASCADE
+ON DELETE CASCADE;
+
+ALTER TABLE t_hospital_medicalcodes
+ADD CONSTRAINT fk_medical_spec_code
+FOREIGN KEY (medical_spec_code_id)
+REFERENCES t_medical_spec_code(id)
+ON UPDATE CASCADE
+ON DELETE CASCADE;
