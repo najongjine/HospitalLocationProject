@@ -1,0 +1,37 @@
+SELECT
+  *,
+  ST_Distance(
+    location::geography,
+    ST_SetSRID(ST_MakePoint(:user_lon, :user_lat), 4326)::geography
+  ) AS distance
+FROM t_hospital
+WHERE ST_DWithin(
+  location::geography,
+  ST_SetSRID(ST_MakePoint(:user_lon, :user_lat), 4326)::geography,
+  :radius
+)
+ORDER BY distance ASC;
+
+:user_lon, :user_lat: 사용자의 경도와 위도입니다.
+
+:radius: 검색 반경(미터 단위)입니다.
+
+location: t_hospital 테이블의 위치 정보 컬럼입니다.
+
+
+
+
+SELECT ST_Distance(
+  ST_SetSRID(ST_MakePoint(126.81794402049044, 35.17252655621733), 4326)::geography,
+  location::geography
+) AS distance_meters
+FROM t_hospital
+WHERE hpid = 'A1500034';
+
+ST_MakePoint(경도, 위도): 사용자의 현재 위치를 나타냅니다.
+
+location: t_hospital 테이블의 GIS 위치 컬럼입니다.
+
+ST_Distance: 두 지점 간의 거리를 계산합니다.
+
+결과는 미터 단위로 반환됩니다.

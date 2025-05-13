@@ -1,0 +1,19 @@
+-- 1. 컬럼 추가
+ALTER TABLE t_hospital
+ADD COLUMN medical_spec_code_id INTEGER;
+
+-- 2. 외래키 제약 추가
+ALTER TABLE t_hospital
+ADD COLUMN medical_spec_code_id INTEGER;
+
+ALTER TABLE t_hospital
+ADD CONSTRAINT fk_medical_spec_code
+FOREIGN KEY (medical_spec_code_id)
+REFERENCES t_medical_spec_code(id)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+
+
+ALTER TABLE t_hospital
+ADD COLUMN  wgs84_lat DOUBLE PRECISION;
+ADD COLUMN  wgs84_lon DOUBLE PRECISION;

@@ -1,0 +1,38 @@
+CREATE TABLE t_medical_spec_code (
+  id SERIAL PRIMARY KEY,
+  code VARCHAR(50) NOT NULL,
+  name VARCHAR(100) NOT NULL
+);
+
+
+CREATE TABLE t_hospital (
+  id SERIAL PRIMARY KEY,
+  hpid VARCHAR(20) UNIQUE NOT NULL,
+  duty_name VARCHAR(10),
+  duty_addr VARCHAR(60),
+  duty_div VARCHAR(2),
+  duty_div_nam VARCHAR(50),
+  duty_emcls VARCHAR(10),
+  duty_emcls_name VARCHAR(40),
+  duty_eryn BOOLEAN,
+  duty_tel1 VARCHAR(20),
+  duty_tel3 VARCHAR(20),
+
+  duty_time1s VARCHAR(5),
+  duty_time1c VARCHAR(5),
+  duty_time2s VARCHAR(5),
+  duty_time2c VARCHAR(5),
+  duty_time3s VARCHAR(5),
+  duty_time3c VARCHAR(5),
+  duty_time4s VARCHAR(5),
+  duty_time4c VARCHAR(5),
+  duty_time5s VARCHAR(5),
+  duty_time5c VARCHAR(5),
+  duty_time6s VARCHAR(5),
+  duty_time6c VARCHAR(5),
+
+  -- 위도/경도를 geometry 타입으로 저장
+  location GEOMETRY(Point, 4326)
+);
+
+CREATE INDEX idx_hospital_location ON t_hospital USING GIST(location);

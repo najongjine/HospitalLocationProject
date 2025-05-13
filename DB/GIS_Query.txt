@@ -1,0 +1,25 @@
+CREATE EXTENSION postgis;
+
+CREATE TABLE t_stores (
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
+  location GEOGRAPHY(Point, 4326) NOT NULL
+);
+
+CREATE INDEX idx_stores_location ON t_stores USING GIST (location);
+
+INSERT INTO t_stores (name, location)
+VALUES
+  ('카페 모카', ST_MakePoint(126.832, 35.166)::geography),
+  ('베이커리 블루', ST_MakePoint(126.834, 35.168)::geography),
+  ('피자 헛', ST_MakePoint(126.836, 35.170)::geography);
+
+
+SELECT
+  id,
+  name,
+  ST_Distance(location, ST_MakePoint(126.833, 35.167)::geography) AS distance_m
+FROM t_stores
+WHERE ST_DWithin(location, ST_MakePoint(126.833, 35.167)::geography, 200)
+ORDER BY distance_m
+LIMIT 10;
