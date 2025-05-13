@@ -1,0 +1,4 @@
+https://www.data.go.kr/data/15001698/openapi.do#/API%20%EB%AA%A9%EB%A1%9D/getHospBasisList
+-건강보험심사평가원_병원정보서비스
+
+https://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList?ServiceKey=K60fwXwUfeie%2Bc5RPS5jl2C3VL9WHVCpNlwzN87iA10pdJUZ3zxgCBWc%2BRsaw9PAbY3plvzstYZbAwBdhTNXaQ%3D%3D&pageNo=1&numOfRows=10
