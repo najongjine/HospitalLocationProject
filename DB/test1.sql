@@ -1,0 +1,3 @@
+SELECT
+*
+FROM t_test1
